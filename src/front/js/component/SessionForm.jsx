@@ -7,6 +7,7 @@ const navigate = useNavigate()
 const [emailValue, setEmailValue] = useState("")
 const [passwordValue, setPasswordValue] = useState("")
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
        const email = emailValue.trim()
@@ -50,9 +51,9 @@ const [passwordValue, setPasswordValue] = useState("")
             return
         }
     }
+
     setEmailValue("")
     setPasswordValue("")
-
 
     }
 

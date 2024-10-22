@@ -4,10 +4,22 @@ import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
 	const navigate = useNavigate()
 
-	const handleLogOut = () =>{
-		if(window.sessionStorage.getItem('token')){
-			window.sessionStorage.removeItem('token')
-			navigate("/")
+	const handleLogOut = async () =>{
+		let token = window.sessionStorage.getItem('token') 
+		if(token){
+			let res = await fetch("https://cuddly-trout-5gq7w6vjvxxw3vr5r-3001.app.github.dev/api/logout",{
+				method: 'POST',
+				headers:{
+					"Authorization": `Bearer ${token}`,
+					"Content-Type": "application/json"
+				}
+			})
+			if (res.ok){
+				let response = await res.json()
+				console.log(response)
+				window.sessionStorage.removeItem("token")
+				navigate("/")
+			}
 		}
 	}
 	return (
